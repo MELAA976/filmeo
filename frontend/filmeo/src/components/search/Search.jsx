@@ -1,14 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { NavLink, Link } from "react-router";
+import { useParams } from "react-router";
 
 
 export default function Search() {
-    <script crossorigin src="https://api.tvmaze.com"></script>
+    
 
     const [search, setSearch] = useState('');
     const [resultSearch, setResultSearch] = useState([]);
-
-
 
     useEffect(() => {
         const PROXY = 'https://api.allorigins.win/raw?url='; //autorisation pour le cross origine
@@ -16,16 +16,6 @@ export default function Search() {
         .then(response => response.json())
         .then(data => setResultSearch(data))
         .catch(error => console.error(error));
-
-
-
-
-
-        /*const PROXY = 'https://api.allorigins.win/raw?url-';
-        fetch('https://api.tvmaze.com/recherche/shows?q-girls')
-        //fetch(`https://api.tvmaze.com/recherche/shows?q-${search}`)
-            .then(response => response.json())
-            .then(data => setResultSearch(data))*/
     }
         , [search])
 
@@ -37,16 +27,27 @@ export default function Search() {
 
     return (
         <>
-            <h1>search</h1>
-            <label htmlFor="recherche">recherche:</label>
+            <h1>Recherche de série</h1>
             <input type="text" onChange={onSearch} />
 
 
             <div>
 
-                {resultSearch && resultSearch.map((result) => (console.log(result.show)
-                
-                ))
+                { resultSearch && resultSearch.map((result) => {
+                     console.log(result.show.image)
+                     return(
+                        <div key={result.show}>
+                            <div className='img'>
+                                <img src={result.show.image && result.show.image.medium} alt = {`image de la série ${result.show.name}`} />
+                            </div>
+                            <div className='describe'>
+                                <h2>{result.show.name}</h2>
+                                <Link to="serieshow">VOIR</Link>
+                            </div>
+                        </div>
+                     )
+                }
+                )
                 }
 
             </div>
