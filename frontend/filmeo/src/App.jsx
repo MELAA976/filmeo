@@ -12,7 +12,7 @@ import './App.css'
       <NavBar />
     <Routes>
     <Route path="/" element={<Search />} />
-    <Route path="/serieshow" element={<Serieshow />}/>
+    <Route path="/serieshow/:show" element={<Serieshow />}/>
   </Routes>
     </>
     
